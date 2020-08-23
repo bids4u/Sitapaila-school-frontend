@@ -1,0 +1,39 @@
+<h1 class="m-5 text-center">NOTIFICATION</h1>
+<form class="container example-form" [formGroup]="notificationForm">
+  <h3>Add Notification</h3>
+  <mat-form-field class="example-full-width">
+    <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+    <br>
+    <small [class.d-none]="title.valid||title.untouched" class="text-danger">title is required</small><br>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Description</mat-label>
+    <textarea  matInput formControlName="description"></textarea>
+  </mat-form-field>
+  <br>
+  <small [class.d-none]="description.valid||description.untouched" class="text-danger">Description is required</small><br>
+
+  <button type="submit" [disabled]="notificationForm.invalid" *ngIf="!submitting" (click)="submit()" mat-raised-button color="primary">Submit</button>
+  <button disabled *ngIf="submitting" mat-stroked-button color="primary">Submitting..</button>
+</form>
+
+<br><br>
+<mat-spinner *ngIf="loading" diameter = "400" ></mat-spinner>
+<div *ngIf="!loading" class="container">
+<div class="row">
+  <div class="col-lg-6 col-md-12 col-sm-12 "*ngFor="let notifications of notification;let i = index">
+
+      <div class="border pb-2">
+        <h3 class="text-white bg-info p-2">{{notifications.title|titlecase}}</h3>
+      <div class=" ml-3">
+        <p>{{notifications.description}}</p>
+        <p class="text-black-50">{{notifications.createdAt|date}}</p>
+        <button mat-raised-button (click)="openDelete(notifications._id)" >Delete</button>
+        <br>
+      </div>
+    </div>
+</div>
+</div>
+

@@ -1,0 +1,83 @@
+<!-- <p>login works!</p>
+<div>
+<form #loginForm="ngForm"  class="form-group" novalidate>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Username</label>
+    <input type="email" class="form-control" name="userName" [(ngModel)]="user.userName" required #userName="ngModel">
+    <div class="danger" [hidden]="userName.valid || userName.pristine">
+      <small class='text-danger'>required field*</small>
+  </div>
+
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" name="password" [(ngModel)]="user.password" #pass="ngModel">
+    <div class="danger" *ngIf="pass.invalid && pass.dirty">
+      <small class="text-danger">required field*</small>
+  </div>
+
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" [checked]="rememberMe" (change)="rememberMeChanged()" name="rememberMe"class="form-check-input" >
+    <label class="form-check-label">Remember me</label>
+  </div>
+  <button type="submit" [disabled]="loginForm.invalid" *ngIf="!submitting" class="btn btn-primary" (click)="login()">login</button>
+    <button disabled *ngIf="submitting" class="btn btn-info">logging in...</button>
+</form>
+</div> -->
+<!-- <div class="container-fluid">
+  <h1>Login Form</h1>
+  <form [formGroup]="registrationForm ">
+    <div class="form-group">
+      <label>Username</label><br>
+      <input formControlName="userName" type="text" class="form-contol"><br>
+      <small [class.d-none]="userName.valid||userName.untouched" class="text-danger">Username is required</small>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label><br>
+      <input formControlName="password" type="password" class="form-contol"><br>
+      <small [class.d-none]="password.valid||password.untouched" class="text-danger">password is required</small>
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" [checked]="rememberMe" (change)="rememberMeChanged()" name="rememberMe"class="form-check-input" >
+      <label class="form-check-label">Remember me</label>
+    </div>
+    <button type="submit" [disabled]="registrationForm.invalid" *ngIf="!submitting" class="btn btn-primary" (click)="login()">login</button>
+    <button disabled *ngIf="submitting" class="btn btn-info">logging in...</button>
+  </form>
+</div> -->
+
+
+
+<mat-card class="login container">
+ <mat-card-header><mat-card-title>Login Form</mat-card-title></mat-card-header>
+  <mat-card-content>
+  <form class="container" [formGroup]="registrationForm ">
+
+    <mat-form-field >
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="userName">
+    </mat-form-field>
+    <br>
+    <small [class.d-none]="userName.valid||userName.untouched" class="text-danger">Username is required</small><br>
+
+    <mat-form-field >
+      <mat-label>Password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field><br>
+      <small [class.d-none]="password.valid||password.untouched" class="text-danger">password is required<br></small>
+
+    <mat-checkbox [checked]="rememberMe" (change)="rememberMeChanged()" name="rememberMe">Remember me</mat-checkbox><br>
+
+    <button type="submit" [disabled]="registrationForm.invalid" *ngIf="!submitting" mat-raised-button color="primary" (click)="login()">login</button>
+    <button disabled *ngIf="submitting" mat-stroked-button color="primary">logging in...</button>
+  </form>
+</mat-card-content>
+</mat-card>
+  <!-- {{this.registrationForm.value|json}} -->
+
+

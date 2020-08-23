@@ -1,0 +1,36 @@
+<h1 class="text-center m-5">NEWS</h1>
+<mat-card class="login container">
+  <mat-card-header><mat-card-title>ADD NEWS</mat-card-title></mat-card-header>
+   <mat-card-content>
+   <form class="container" [formGroup]="pdfForm">
+
+     <mat-form-field class="example-full-width">
+       <mat-label>Description</mat-label>
+       <input matInput formControlName="description">
+     </mat-form-field>
+     <br>
+     <small [class.d-none]="description.valid||description.untouched" class="text-danger">Description is required</small><br>
+     <input type="file" name="pdf" accept="application/pdf" (change)="fileChanged($event)" required>
+     <!-- <button type="submit" [disabled]="pdfForm.invalid" *ngIf="!submitting" (click)="submit()" mat-raised-button color="primary">Submit</button> -->
+     <button disabled *ngIf="submitting" mat-stroked-button color="primary">Submitting..</button>
+     <input type="submit" value="submit" [disabled]="pdfForm.invalid" *ngIf="!submitting" (click)="submit()"  color="primary">
+   </form>
+ </mat-card-content>
+ </mat-card>
+<br><br>
+<mat-divider></mat-divider>
+<mat-spinner *ngIf="loading" diameter = "400" ></mat-spinner>
+<div *ngIf="!loading" >
+<div class="row">
+  <div class="col-lg-4 col-md-6 col-sm-12"*ngFor="let pdfs of pdf;let i = index">
+      <!-- {{this.url+pdfs.pdf}} -->
+      <a href="{{this.url}}{{pdfs.pdf}}" target="_blank"><h3>{{pdfs.description|titlecase}}</h3></a>
+      <p>Published on {{pdfs.createdAt|date}}</p>
+        <!-- <pdf-viewer src="{{this.url}}{{pdfs.pdf}}" [render-text]="true" style="height:40%"></pdf-viewer> -->
+        <br>
+        <button mat-raised-button (click)="openDelete(pdfs._id)">Delete</button>
+        <br>
+        <mat-divider></mat-divider>
+</div>
+</div>
+

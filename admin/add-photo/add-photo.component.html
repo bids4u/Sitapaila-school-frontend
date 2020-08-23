@@ -1,0 +1,59 @@
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        Create New Album
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-card class="login container">
+      <mat-card-header><mat-card-title>Create a new Photo Album</mat-card-title></mat-card-header>
+       <mat-card-content>
+       <form class="container" [formGroup]="photoForm">
+
+         <mat-form-field class="example-full-width">
+           <mat-label>Description</mat-label>
+           <input matInput formControlName="description">
+         </mat-form-field>
+         <br>
+         <small [class.d-none]="description.valid||description.untouched" class="text-danger">Description is required</small><br>
+         <mat-label>Add photos</mat-label>
+         <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+          <ngx-dropzone-label>
+            <div>
+              <h2>Drop Your Photos</h2>
+            </div>
+          </ngx-dropzone-label>
+          <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+          </ngx-dropzone-image-preview>
+        </div>
+
+         <button type="submit" [disabled]="photoForm.invalid||!this.fsubmit" *ngIf="!submitting" mat-raised-button color="primary" (click)="submit()">Submit</button>
+         <button disabled *ngIf="submitting" mat-stroked-button color="primary">Submitting..</button>
+       </form>
+     </mat-card-content>
+     </mat-card>
+  </mat-expansion-panel>
+  <br><br>
+   <mat-spinner *ngIf="loading" diameter = "400" ></mat-spinner>
+   <div *ngIf="!loading" class="container">
+    <div class=row>
+      <div class="col-lg-4 col-md-6 col-sm-1 "*ngFor="let photo of photos;let i = index">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              {{photo.description}}
+            </mat-card-title>
+          </mat-card-header>
+          <img id="myImg"  mat-card-image src="{{photo.image[0]}}">
+          <mat-card-actions>
+             <a routerLink="/admin/show/{{photo._id}}"><button mat-button>More</button></a>
+            <button mat-button (click)="openDelete(photo._id,i)">Delete Photos</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+   </div>
+
+
+

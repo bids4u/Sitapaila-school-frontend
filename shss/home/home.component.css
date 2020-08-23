@@ -1,0 +1,28 @@
+img{
+  height: 30vh;
+}
+.homeImg{
+  width:100vw;
+  height:65vh;
+}
+.news{
+  margin:50px;
+  padding:10px;
+}
+a{
+  color:inherit;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+  img{
+    height: 40vh;
+  }
+ .homeImg{
+  width:100vw;
+  height:40vh;
+  }
+  .news{
+    margin:1rem;
+  }
+}

@@ -1,0 +1,33 @@
+<div  class="sidenav" *ngIf="sidnav();  else elseBlock">
+  <mat-sidenav-container>
+    <mat-sidenav #drawer mode="side" opened>
+      <mat-list>
+       <mat-list-item><a routerLink="/admin/home"><button mat-button color="primary" >Home</button></a></mat-list-item><mat-divider></mat-divider>
+       <mat-list-item><a routerLink="/admin/add"><button mat-button color="primary">Photos</button></a></mat-list-item><mat-divider></mat-divider>
+       <mat-list-item><a routerLink="/admin/pdf"><button mat-button color="primary">News</button></a></mat-list-item><mat-divider></mat-divider>
+       <mat-list-item><a routerLink="/admin/calendar"><button mat-button color="primary">Calendar</button></a></mat-list-item><mat-divider></mat-divider>
+       <mat-list-item><a routerLink="/admin/notification"><button mat-button color="primary">Notification</button></a></mat-list-item><mat-divider></mat-divider>
+       <mat-list-item><button mat-button color="primary" (click)="logout()">Logout</button></mat-list-item><mat-divider></mat-divider>
+
+      </mat-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="row">
+        <div class="col"><button  mat-raised-button (click)="drawer.toggle()"><mat-icon>list</mat-icon></button></div>
+        <div class="col"><h3>Shree Sitapaila Secondary School</h3></div>
+      </div>
+
+
+      <router-outlet></router-outlet>
+
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+</div>
+<ng-template #elseBlock>
+  <app-navbar></app-navbar>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</ng-template>
+

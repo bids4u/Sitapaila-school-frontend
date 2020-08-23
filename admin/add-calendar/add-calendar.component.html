@@ -1,0 +1,64 @@
+<h1 class="text-center m-5">CALENDAR</h1>
+<form class="container example-form" [formGroup]="calendarForm">
+  <h3>Add Date</h3>
+  <mat-form-field class="example-full-width">
+    <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+    <br>
+    <small [class.d-none]="title.valid||title.untouched" class="text-danger">title is required</small><br>
+  <mat-form-field appearance="fill">
+      <mat-label>Select</mat-label>
+      <mat-select formControlName="eventType">
+        <mat-option value="1">Holiday</mat-option>
+        <mat-option value="2">Working Day</mat-option>
+      </mat-select>
+  </mat-form-field>
+    <br>
+    <mat-form-field f class="example-full-width" appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input formControlName="eventd" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field><br>
+  <button type="submit" [disabled]="calendarForm.invalid" *ngIf="!submitting" (click)="submit()" mat-raised-button color="primary">Submit</button>
+  <button disabled *ngIf="submitting" mat-stroked-button color="primary">Submitting..</button>
+</form>
+<br><br>
+
+<mat-spinner *ngIf="loading" diameter = "400" ></mat-spinner>
+<div *ngIf="!loading" class="container">
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-12"*ngFor="let cals of calendar;let i = index">
+
+      <div class=" border-left border-danger m-2 p-2" *ngIf="cals.eventType==1;">
+        <div class="row">
+          <div class="col-4">
+            <h3 class="text-danger">{{cals.eventd|date:'dd'}}</h3>{{cals.eventd|date:'LLL'}}
+          </div>
+          <div class="col border-left border-secondary">
+            <h4>{{cals.title|titlecase}}</h4><br><p>{{cals.eventd|date:'EEEE'}}</p>
+          </div>
+        </div>
+        <button mat-raised-button (click)="openDelete(cals._id)">Delete</button>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class=" border-left border-success m-2 p-2" *ngIf="cals.eventType==2;">
+
+        <div class="row">
+          <div class="col-4">
+            <h3 class="text-success">{{cals.eventd|date:'dd'}}</h3>{{cals.eventd|date:'LLL'}}
+          </div>
+          <div class="col border-left border-secondary">
+            <h4>{{cals.title|titlecase}}</h4><br><p>{{cals.eventd|date:'EEEE'}}</p>
+          </div>
+        </div>
+          <button mat-raised-button (click)="openDelete(cals._id)">Delete</button>
+          <mat-divider></mat-divider>
+        </div>
+
+        </div>
+</div>
+</div>
+
